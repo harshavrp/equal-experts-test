@@ -1,0 +1,17 @@
+Functional and exploratory testing
+
+Functional testing is done by using manual and automated test techniques.
+Functional Tests covered - Create and delete a booking
+
+Exploratory tests covered - field validations, layouts
+
+First name and last name values are overlapped on to the next fields when the text is long.
+Checkin and checkout dates can be from the past.
+Checkout date can be earlier than checkin date.
+
+Field validations:
+First name - No validation for length and data types
+Surname - No validatio for length and data types
+Price - Accepts only integers and decimals
+Deposit paid - Drop down list with two values allowed - True/false
+Checkin & checkout dates - only date types allowed. But when we enter an 8 digit number - 11111111, it converts it into a date from 1970s
