@@ -1,17 +1,57 @@
-Functional and exploratory testing
+Functional and exploratory testing has been performed on the application.
 
-Functional testing is done by using manual and automated test techniques.
-Functional Tests covered - Create and delete a booking
+-------------------------------------------------------------------------------------------------------------------------
+Functional Testing: Functional testing is done using manual and automated test techniques.
+As part of Functional Testing, tests covered are - 
+1) Create a booking - Automated test can be found at src/test/resources/features/createBooking.feature
+2) Delete a booking - Automated test can be found at src/test/resources/features/deleteBooking.feature
+-------------------------------------------------------------------------------------------------------------------------
 
+Exploratory Testing: Verified the booking creation and deletion using various types of data which includes special characters, long text in the fields and random date values. 
+-------------------------------------------------------------------------------------------------------------------------
+
+Defects found in Functional and Exploratory testing:
+1) System accepts the Check in and check out dates from the past.
+Steps to reproduce the defect:
+* launch the app - http://hotel-test.equalexperts.io
+* Enter/select the following values
+  first name - Test1
+  surname - sur1
+  Price - 25
+  Select Deposit - true
+  Check in date - "2010-01-11"
+  Check out date - "2010-02-12"
+* Click Save button
+Booking is created with the dates from the past.
+
+2) System accepts the check out date earlier than check in date
+Steps to reproduce the defect:
+* launch the app - http://hotel-test.equalexperts.io
+* Enter/select the following values
+  first name - Test1
+  surname - sur1
+  Price - 25
+  Select Deposit - true
+  Check in date - "2018-07-11"
+  Check out date - "2018-05-12"
+* Click Save button
+Booking is created with the check out date being earlier than check in date.
+
+3) All the fields on the page does not have any validations such as total length of characters allowed and data types of the fields, except for Deposit paid field.
+First name, surname & price - can enter any length of characters and special symbols and numbers
+Checkin and checkout dates - can input numbers and a special symbol "-". Eg: date field accepts---888--- but the record doesn't get saved and doesn't throw an error as well
+
+4) Text is overlapped on to the next fields when first name and surname have lengthy text.
 Exploratory tests covered - field validations, layouts
 
-First name and last name values are overlapped on to the next fields when the text is long.
-Checkin and checkout dates can be from the past.
-Checkout date can be earlier than checkin date.
+5) System accepts a random date when we enter an 8 digit number in the check in and checkout dates. For example, enter 11111111 in a date field and it saves the date from 1970s.
+-------------------------------------------------------------------------------------------------------------------------
+Due to unavailability of specific tools on my machine, I was unable to cover the following types of testing on the application. 
 
-Field validations:
-First name - No validation for length and data types
-Surname - No validatio for length and data types
-Price - Accepts only integers and decimals
-Deposit paid - Drop down list with two values allowed - True/false
-Checkin & checkout dates - only date types allowed. But when we enter an 8 digit number - 11111111, it converts it into a date from 1970s
+1) Cross Browser Testing: BrowserStack can be used for testing the applications on various versions browsers and on different operating systems. This will highlight potential incompatibilities with certain browser versions and the page layout issues. 
+
+2) Performance testing: Gatling can be used to test the performance of the system in terms of transactions and journeys per second. Load can be determined based on the volumetrics received from the business over the past years and can be injected through gatling. Gatling report provides a response times, journeys per second, number of active users etc
+
+3) Security testing: OWASP ZAP tool can be used to perform the security testing. This tool highlights the potential security risks in the application.
+
+4) Accessibility Testing: WAVE tool can be used to perform the Accessibility testing. This tool highlights missing form labels, headers on the page which causes issues for the users who use screen readers to access the application.
